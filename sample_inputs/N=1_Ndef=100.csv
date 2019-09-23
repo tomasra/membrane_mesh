@@ -1,0 +1,17 @@
+" Defektu tankis Ndef",100," [i kvadratini mikrometra]"
+" Defektu skaicius N",1,""
+" Heksagono krastine a",196.1887304255141," [nm]"
+" Buferio zonos plotis",28.482060646876608," [nm]"
+"","",""
+""," x koordinate [nm]"," y koordinate [nm]"
+" Heksagono kampas Nr. 1",392.3774608510282,196.1887304255141
+" Heksagono kampas Nr. 2",294.2830956382712,366.0931549102263
+" Heksagono kampas Nr. 3",98.0943652127571,366.09315491022636
+" Heksagono kampas Nr. 4",0,196.18873042551414
+" Heksagono kampas Nr. 5",98.09436521275697,26.284305940801914
+" Heksagono kampas Nr. 6",294.28309563827105,26.2843059408018
+"","",""
+" Heksagono centras",196.1887304255141,196.1887304255141
+"","",""
+" Defekto centro x koordinate [m]"," Defekto centro y koordinate [m]"," Defekto spindulys r [m]"
+196.1887304255141e-9,196.1887304255141e-9,30e-9
