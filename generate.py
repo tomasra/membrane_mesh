@@ -238,78 +238,27 @@ def get_horizontal_surfaces(exp, z):
 model = gmsh.model
 factory = model.occ
 
-# gmsh.initialize()
+
 gmsh.initialize('', False)
 gmsh.option.setNumber("General.Terminal", 1)
-# gmsh.option.setNumber("Geometry.AutoCoherence", 0)
-# gmsh.option.setNumber("Geometry.Tolerance", 1e-1)
-# gmsh.option.setNumber("Mesh.CharacteristicLengthMin", 0.25)
-# gmsh.option.setNumber("Mesh.CharacteristicLengthMax", 100)
-# gmsh.option.setNumber("Mesh.CharacteristicLengthFactor", 1)
-
 gmsh.option.setNumber("Mesh.CharacteristicLengthExtendFromBoundary", 0)
 gmsh.option.setNumber("Mesh.CharacteristicLengthFromPoints", 0)
 gmsh.option.setNumber("Mesh.CharacteristicLengthFromCurvature", 0)
-# gmsh.option.setNumber("Mesh.MinimumCirclePoints", 15)
-
-
-# gmsh.option.setNumber("Mesh.Recombine3DAll", 1)
-# gmsh.option.setNumber("Mesh.Recombine3DLevel", 2)
-# gmsh.option.setNumber("Mesh.Recombine3DConformity", 4)
-
-
 gmsh.option.setNumber("Mesh.RecombineAll", 1)
-# gmsh.option.setNumber("Mesh.RecombineOptimizeTopology", 10)
-# gmsh.option.setNumber("Mesh.RecombinationAlgorithm", 2)
-
 gmsh.option.setNumber("Mesh.Algorithm", 8)
-# gmsh.option.setNumber("Mesh.Algorithm3D", 1)
-# gmsh.option.setNumber("Mesh.FlexibleTransfinite", 1)
-# gmsh.option.setNumber("Mesh.Smoothing", 100)
-# gmsh.option.setNumber("Mesh.SubdivisionAlgorithm", 2)
-
-
 gmsh.option.setNumber("Mesh.SurfaceFaces", 1)
-# gmsh.option.setNumber("Mesh.AngleToleranceFacetOverlap", 1e-6)
-
 gmsh.option.setNumber("Mesh.MshFileVersion", 2.2)
 
-
-
-'''
-Threading
-'''
+# Threading
 gmsh.option.setNumber("General.NumThreads", 8)
 gmsh.option.setNumber("Geometry.OCCParallel", 1)
 gmsh.option.setNumber("Mesh.MaxNumThreads1D", 8)
 gmsh.option.setNumber("Mesh.MaxNumThreads2D", 8)
 gmsh.option.setNumber("Mesh.MaxNumThreads3D", 8)
 
-
-
-
-
 model.add("membrane-model")
-
-
-# exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/MeshTests_N=10_Ndef=100_r=10nm/coord/Coordinates_9.csv')
-# exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/sandbox/coordinates/Tiny.csv')
-# exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/sandbox/coordinates/Coordinates_1.csv')
-
-# exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/Sintetiniai_Duomenys/20190307_SulipimasNanometrais_51_ir_195/Sulipe_Klasterizuoti_Atsitiktinai_Issideste_Defektu_Centrai_-_FiksuotasSulipimoSlenkstis=195nm_-_DefektuTankis_Ndef=270_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=848.47nm/1_Scenarijus_-_Visi_Defektu_Spinduliai_Vienodi_rdef=0.5nm/Defektu_Centru_Koordinates/DefektuCentruKoordinates_-_AtvejoNr_001_DefektuTankis_Ndef=270_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=848.47nm_BuferioZonosPlotis=30nm.csv')
-# exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/Sintetiniai_Duomenys/20190502_DefektuDydziai/Klasterizuoti_Atsitiktinai_Issideste_Defektu_Centrai_-_MinimaliTikimybe=0.11_KlasteriuDydis=0.5_DefektuTankis_Ndef=0.1_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=44087.9nm/2_Scenarijus_-_Visi_Defektu_Spinduliai_Vienodi_rdef=1nm/Defektu_Centru_Koordinates/DefektuCentruKoordinates_-_AtvejoNr_001_DefektuTankis_Ndef=0.1_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=44087.9nm_BuferioZonosPlotis=12nm.csv')
-
-# exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/Sintetiniai_Duomenys/20180416_SkirtingiDefektuDydziai_N=26/9nm/DefektuSpindulys_r0=9nm_DefektuTankis_Ndef=1_IKvadratiniMikrometra_DefektuSkaicius_N=26_HeksagonoKrastine_a=3163.45nm_BuferioZonosPlotis=16nm/Defektu_Centru_Koordinates/DefektuCentruKoordinates_-_DefektuSpindulys_r0=9nm_DefektuTankis_Ndef=1_IKvadratiniMikrometra_DefektuSkaicius_N=26_HeksagonoKrastine_a=3163.45nm_BuferioZonosPlotis=16nm_AtvejoNr_001.csv')
 exp = Experiment.read(INPUT_FILE)
 
-
-'''
-Helmholtz layer
-'''
-# base_helmholtz = exp.create_hexagon_surface(factory, 0)
-# ext_helmholtz = factory.extrude([(2, base_helmholtz)], 0, 0, exp.d_helmholtz, 
-#     numElements=[1], recombine=RECOMBINE)
-# vol_helmholtz = ext_helmholtz[1][1]
 
 
 '''
@@ -348,12 +297,6 @@ if exp.defects:
         idx for idx, defect_base_tag in enumerate(defect_base_tags)
         if exp.defects[idx] in standalone_defects
     ]
-    # if EXTRUDE_DEFECTS:
-    #     defect_volumes = [
-    #         factory.extrude([(2, defect_base_tags[idx])], 0, 0, 
-    #             exp.d_submembrane + exp.d_membrane, 
-    #             numElements=[1], recombine=RECOMBINE)[1][1]
-    #         for idx in defect_indices]
 else:
     base_submembrane_no_defects = base_submembrane
     defect_indices = []
@@ -378,20 +321,6 @@ for cluster in clusters:
         removeObject=True, removeTool=True)
 
     cluster_def_tags_unions.append((cluster_def_tags, cluster_union))
-
-    # if EXTRUDE_DEFECTS:
-    #     cluster_tags = factory.extrude(cluster_union[0], 0, 0,
-    #         exp.d_submembrane + exp.d_membrane,
-    #         numElements=[1], recombine=RECOMBINE)
-
-    #     cluster_volumes = [
-    #         cluster_tag[1] for cluster_tag in cluster_tags 
-    #         if cluster_tag[0] == 3]
-    #     cluster_volumes_all.append(cluster_volumes)
-
-    #     cluster_indices = [
-    #         exp.defects.index(defect) for defect in cluster.defects]
-    #     cluster_indices_all.append(cluster_indices)
 
 
 factory.removeAllDuplicates()
@@ -473,7 +402,7 @@ if EXTRUDE_SOLUTION:
 factory.synchronize()
 
 '''
-[NEW] Helmholtz
+Helmholtz
 '''
 if EXTRUDE_HELMHOLTZ:
     ext_helmholtz = factory.extrude(
@@ -494,69 +423,8 @@ if EXTRUDE_HELMHOLTZ:
     model.setPhysicalName(3, group_helmholtz, 'helmholtz')
 
 
-# factory.removeAllDuplicates()
-# factory.synchronize()
-
-'''
-[NEW] Solution
-'''
-'''
-EXTRUDE_SOLUTION:
-    # heights = [
-    #     exp.d_solution * 0.1,
-    #     exp.d_solution * 0.2,
-    #     exp.d_solution * 0.3,
-    #     exp.d_solution * 0.4,]
-    heights = [exp.d_solution]
-
-    ext_solution_base = get_horizontal_surfaces(exp, exp.z_membrane_top)
-    cumulative_height = exp.z_membrane_top
-
-    vols_solution = []
-    for height in heights:
-        print(ext_solution_base)
-        ext_solution = factory.extrude(
-            ext_solution_base,
-            0, 0, height,
-            numElements=[1], recombine=RECOMBINE)
-        vols_solution += [vol for vol in ext_solution if vol[0] == 3]
-        cumulative_height += height
-        factory.synchronize()
-        ext_solution_base = get_horizontal_surfaces(exp, cumulative_height)
-
-    # TODO: the following causes the mesh to fail to import with deal.ii:
-    # if len(vols_solution) > 1:
-    #     vol_solution = factory.fuse(
-    #         [vols_solution[0]], vols_solution[1:],
-    #         removeObject=True, removeTool=True)[0][0][1]
-    # else:
-    #     vol_solution = vols_solution[0]
-
-    group_solution = model.addPhysicalGroup(3, vols_solution)
-    model.setPhysicalName(3, group_solution,    'solution')
-'''
-
-
-# factory.removeAllDuplicates()
 factory.synchronize()
 
-# Layers
-# if EXTRUDE_HELMHOLTZ:
-    # group_helmholtz = model.addPhysicalGroup(3, [vol_helmholtz])
-    # group_helmholtz = model.addPhysicalGroup(3, vols_helmholtz)
-    # model.setPhysicalName(3, group_helmholtz,   'helmholtz')
-
-# if EXTRUDE_SUBMEMBRANE:
-#     group_submembrane = model.addPhysicalGroup(3, [vol_submembrane])
-#     model.setPhysicalName(3, group_submembrane, 'submembrane')
-
-# if EXTRUDE_MEMBRANE:
-#     group_membrane = model.addPhysicalGroup(3, [vol_membrane])
-#     model.setPhysicalName(3, group_membrane,    'membrane')
-
-# if EXTRUDE_SOLUTION:
-#     group_solution = model.addPhysicalGroup(3, [vol_solution])
-#     model.setPhysicalName(3, group_solution,    'solution')
     
 
 # Top surface
@@ -662,45 +530,9 @@ field_defect_tag = 5
 
 mesh_field_ids = []
 mesh_field_id = 1
-'''
-for defect in exp.defects:
-    line_lc_min = DEF_LC_MIN(defect)
-    line_lc_max = DEF_LC_MAX(defect)
-    line_r_min = DEF_R_MIN(defect)
-    line_r_max = DEF_R_MAX(defect)
-
-    line_slope = (line_lc_max - line_lc_min) / (line_r_max - line_r_min)
-    line_intercept = line_lc_min - line_slope * line_r_min
-
-    f_sub_mem_linear   = f"Min({line_lc_max}, Max({line_lc_min}, {line_slope} * Sqrt((x-{defect.x})^2 + (y-{defect.y})^2) + ({line_intercept})))"
-    # w_sub_mem   = f"(1 - ({w_sol} + {w_helm}))"
-    w_sub_mem = 1
-
-    model.mesh.field.add("MathEval", field_defect_tag)
-    model.mesh.field.setString(field_defect_tag, "F", 
-        # f"({w_helm} * {f_helm}) + ({w_sub_mem} * {f_sub_mem}) + ({w_sol} * {f_sol})")
-        f"{w_sub_mem} * {f_sub_mem_linear}")
-    field_defects.append(field_defect_tag)
-    field_defect_tag += 1
-'''
-
-
-# model.mesh.setRecombine(2, base_submembrane_no_defects)
-# for defect in exp.defects:
-#     defect_surface_dimtags = model.getEntitiesInBoundingBox(
-#         defect.x - defect.radius - EPSILON, 
-#         defect.y - defect.radius - EPSILON, 
-#         exp.z_submembrane_bottom - EPSILON,
-#         defect.x + defect.radius + EPSILON,
-#         defect.y + defect.radius + EPSILON,
-#         exp.z_submembrane_bottom + EPSILON, 
-#         dim=2)
-#     for dimtag in defect_surface_dimtags:
-#         model.mesh.setRecombine(2, dimtag[1])
 
 
 
-# for idx, defect_base_tag in enumerate(defect_base_tags):
 for defect in exp.defects:
     defect_curve_dimtags = model.getEntitiesInBoundingBox(
         defect.x - defect.radius - EPSILON, 
@@ -732,31 +564,6 @@ for defect in exp.defects:
 
 
 
-
-
-# field_test = 100
-# model.mesh.field.add("MathEval", field_test)
-# model.mesh.field.setString(field_test, "F", f'If (z > 5.46) 10 EndIf')
-# field_defects = [field_test]
-
-
-'''
-field_sub_mem_def = max(field_defects) + 1
-model.mesh.field.add("Min", field_sub_mem_def)
-model.mesh.field.setNumbers(field_sub_mem_def, "FieldsList",
-    # [2, 3] + field_defects)
-    field_defects)
-
-
-field_restrict = max(field_defects) + 2
-model.mesh.field.add("Restrict", field_restrict)
-model.mesh.field.setNumbers(field_restrict, "RegionsList", volumes_sub_mem_def)
-    # [vol_submembrane, vol_membrane] + defect_tags)
-model.mesh.field.setNumber(field_restrict, "IField", field_sub_mem_def)
-'''
-
-# if field_defects:
-# field_all = max(field_defects) + 3
 mesh_field_id_all = max(mesh_field_ids) + 1
 model.mesh.field.add("Min", mesh_field_id_all)
 model.mesh.field.setNumbers(
@@ -769,6 +576,5 @@ model.mesh.generate(3)
 
 # gmsh.write("membrane_quad.bdf")
 # gmsh.write("membrane_quad.msh")
-gmsh.write(sys.argv[1])
 gmsh.fltk.run()
 gmsh.finalize()
