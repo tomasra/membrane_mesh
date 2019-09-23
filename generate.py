@@ -1,12 +1,13 @@
-# import sys
-# sys.path.append('/usr/lib')
+#!/usr/bin/env python
 import sys
 import csv
 import copy
-import numpy as np
 from collections import deque
-
+import numpy as np
 import gmsh
+
+
+INPUT_FILE = sys.argv[1]
 
 
 MULTIPLIER_MM = 1e3
@@ -296,11 +297,10 @@ model.add("membrane-model")
 # exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/sandbox/coordinates/Coordinates_1.csv')
 
 # exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/Sintetiniai_Duomenys/20190307_SulipimasNanometrais_51_ir_195/Sulipe_Klasterizuoti_Atsitiktinai_Issideste_Defektu_Centrai_-_FiksuotasSulipimoSlenkstis=195nm_-_DefektuTankis_Ndef=270_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=848.47nm/1_Scenarijus_-_Visi_Defektu_Spinduliai_Vienodi_rdef=0.5nm/Defektu_Centru_Koordinates/DefektuCentruKoordinates_-_AtvejoNr_001_DefektuTankis_Ndef=270_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=848.47nm_BuferioZonosPlotis=30nm.csv')
-exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/Sintetiniai_Duomenys/20190502_DefektuDydziai/Klasterizuoti_Atsitiktinai_Issideste_Defektu_Centrai_-_MinimaliTikimybe=0.11_KlasteriuDydis=0.5_DefektuTankis_Ndef=0.1_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=44087.9nm/2_Scenarijus_-_Visi_Defektu_Spinduliai_Vienodi_rdef=1nm/Defektu_Centru_Koordinates/DefektuCentruKoordinates_-_AtvejoNr_001_DefektuTankis_Ndef=0.1_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=44087.9nm_BuferioZonosPlotis=12nm.csv')
+# exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/Sintetiniai_Duomenys/20190502_DefektuDydziai/Klasterizuoti_Atsitiktinai_Issideste_Defektu_Centrai_-_MinimaliTikimybe=0.11_KlasteriuDydis=0.5_DefektuTankis_Ndef=0.1_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=44087.9nm/2_Scenarijus_-_Visi_Defektu_Spinduliai_Vienodi_rdef=1nm/Defektu_Centru_Koordinates/DefektuCentruKoordinates_-_AtvejoNr_001_DefektuTankis_Ndef=0.1_IKvadratiniMikrometra_DefektuSkaicius_N=505_HeksagonoKrastine_a=44087.9nm_BuferioZonosPlotis=12nm.csv')
 
 # exp = Experiment.read('/data/Dropbox/Git/tblm-defects/modeling/experiments/Sintetiniai_Duomenys/20180416_SkirtingiDefektuDydziai_N=26/9nm/DefektuSpindulys_r0=9nm_DefektuTankis_Ndef=1_IKvadratiniMikrometra_DefektuSkaicius_N=26_HeksagonoKrastine_a=3163.45nm_BuferioZonosPlotis=16nm/Defektu_Centru_Koordinates/DefektuCentruKoordinates_-_DefektuSpindulys_r0=9nm_DefektuTankis_Ndef=1_IKvadratiniMikrometra_DefektuSkaicius_N=26_HeksagonoKrastine_a=3163.45nm_BuferioZonosPlotis=16nm_AtvejoNr_001.csv')
-
-
+exp = Experiment.read(INPUT_FILE)
 
 
 '''
